@@ -1,0 +1,17 @@
+.container {
+    width: 800px;
+    margin: 5em auto;
+}
+
+.container input {
+    margin: 0 0.5em;
+    text-align: center;
+}
+
+.container input[type="number"] {
+    width: 50px;
+}
+
+.container input[type="text"] {
+    width: 200px;
+}
