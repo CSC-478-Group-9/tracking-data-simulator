@@ -79,10 +79,14 @@ class App extends React.Component {
                            name="endpoint"
                            value={this.state.endpoint}
                            onChange={e => this.handleChange(e)}/>
-                    endpoint.
+                    endpoint from
+                    <input type="text"
+                           name="href"
+                           value={this.state.href}
+                           onChange={e => this.handleChange(e)}/>
                 </p>
 
-                <p>Sending every {this.state.dataSendInterval} seconds to endpoint {this.state.endpoint}</p>
+                <p>Sending every {this.state.dataSendInterval} milliseconds to endpoint {this.state.endpoint}</p>
                 <p>There have been {this.state.uniqueIDs} unique simulated visitors sent.</p>
                 <button type={"submit"}
                         onClick={this.handleClick}>{this.state.isSendingData ? 'STOP' : 'START'}</button>
