@@ -9,7 +9,7 @@ class App extends React.Component {
             isSendingData: false,
             uniqueIDs: 0,
             dataSendInterval: 1000,
-            endpoint: "http://0.0.0.0:8080/v1/track/",
+            endpoint: "http://127.0.0.1:4100/v1/track/",
             href: "https://demo.com/"
         };
 
