@@ -1,6 +1,9 @@
 import './App.css';
 import * as React from "react";
 import {v4 as uuidv4} from "uuid";
+import Toggle from 'react-toggle';
+import "react-toggle/style.css";
+
 
 class App extends React.Component {
     constructor(props) {
@@ -10,7 +13,8 @@ class App extends React.Component {
             uniqueIDs: 0,
             dataSendInterval: 1000,
             endpoint: "http://127.0.0.1:4100/v1/track/",
-            href: "https://demo.com/"
+            href: "https://test.com/",
+            useValidAPIKEY: true
         };
 
         // binding is necessary to make `this` work in the callback
@@ -19,10 +23,14 @@ class App extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-
     handleChange(e) {
+        console.log(e.target.type);
+        const target = e.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
         this.setState({
-            [e.target.name]: e.target.value
+            [name]: value
         });
     }
 
@@ -34,6 +42,7 @@ class App extends React.Component {
 
         const session = {
             type: "session",
+            apiKey: (this.state.useValidAPIKEY) ? "f1db5f3896f378fdd54b969fe2dc518e" : "0000",
             anonymousID: uuidv4(),
             loadTime: new Date().now,
             unloadTime: new Date().now,
@@ -85,8 +94,14 @@ class App extends React.Component {
                            value={this.state.href}
                            onChange={e => this.handleChange(e)}/>
                 </p>
+                <Toggle
+                    id='useValidAPIKEY'
+                    name='useValidAPIKEY'
+                    defaultChecked={this.state.useValidAPIKEY}
+                    onChange={e => this.handleChange(e)}/>
+                <label htmlFor='cheese-status'>Use Valid API Key</label>
 
-                <p>Sending every {this.state.dataSendInterval} milliseconds to endpoint {this.state.endpoint}</p>
+                <p>Sending every {this.state.dataSendInterval} milliseconds to endpoint {this.state.endpoint} with API key {(this.state.useValidAPIKEY) ? "f1db5f3896f378fdd54b969fe2dc518e" : "0000"}</p>
                 <p>There have been {this.state.uniqueIDs} unique simulated visitors sent.</p>
                 <button type={"submit"}
                         onClick={this.handleClick}>{this.state.isSendingData ? 'STOP' : 'START'}</button>
