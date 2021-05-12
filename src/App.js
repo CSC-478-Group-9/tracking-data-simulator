@@ -29,6 +29,7 @@ class App extends React.Component {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
 
+        // set state to changed value
         this.setState({
             [name]: value
         });
@@ -40,6 +41,7 @@ class App extends React.Component {
         xhr.open("POST", this.state.endpoint);
         xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
 
+        // Create dummy session object
         const session = {
             type: "session",
             apiKey: (this.state.useValidAPIKEY) ? "f1db5f3896f378fdd54b969fe2dc518e" : "0000",
@@ -58,6 +60,7 @@ class App extends React.Component {
         };
         xhr.send(JSON.stringify(session));
 
+        // count unique events sent
         this.setState({
             uniqueIDs: this.state.uniqueIDs + 1
         });
@@ -75,6 +78,7 @@ class App extends React.Component {
         });
     }
 
+    // view to return
     render() {
         return (
             <div className={"container"}>
